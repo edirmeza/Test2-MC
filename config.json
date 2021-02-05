@@ -12,36 +12,44 @@
        }
     },
     "arguments": {
-        "execute": {
-            "inArguments": [
-                {
-                    "emailAddress": "{{InteractionDefaults.Email}}"
-                },
-                {
-                    "phoneNumber": "{{Contact.Default.PhoneNumber}}"
-                }
-            ],
-            "outArguments": [
-                {
-                    "foundSignupDate": ""
-                }
-            ],
-            "url": "https://some-endpoint.com/execute"
-        }
-    },
+    "execute": {
+      "inArguments":[
+        { "idUser": "{{Contact.Attribute.KAVAK_Demo.nombre}}"},
+        { "idCampana": "{{Contact.Attribute.KAVAK_Demo.telefono}}"}
+      ],
+      "outArguments": [
+        { "success":"boolean" }
+      ],
+      "url": "https://test-app-2021-04-02.herokuapp.com/ixn/activities/portalweb/execute/",
+      "verb": "POST",
+      "body": "",
+      "header": "",
+      "format": "json",
+      "useJwt": false,
+      "timeout": 10000
+    }
+  },
     "configurationArguments": {
+        "applicationExtensionKey": "564a3b1e-93f5-495d-ad4f-c9d183bffb0b",
+        "defaults": { "priority": "4"},
        "save": {
-           "url": "URI/for/your/activity/save"
-       },
-       "publish": {
-           "url": "URI/for/your/activity/publish"
-       },
-       "validate": {
-           "url": "URI/for/your/activity/validate"
-       },
-       "stop": {
-           "url": "URI/for/your/activity/stop"
-       }
+      "url": "https://marketing-cloud-ws-dev.herokuapp.com/ixn/activities/portalweb/save/",
+      "body": "",
+      "verb": "POST",
+      "useJwt": false
+    },
+    "publish": {
+      "url": "https://marketing-cloud-ws-dev.herokuapp.com/ixn/activities/portalweb/publish/",
+      "verb": "POST",
+      "body": "",
+      "useJwt": false
+    },
+    "validate": {
+      "url": "https://marketing-cloud-ws-dev.herokuapp.com/ixn/activities/portalweb/validate/",
+      "verb": "POST",
+      "body": "",
+      "useJwt": false
+    }
     },
     "wizardSteps": [
        { "label": "Step 1", "key": "step1" },
@@ -61,15 +69,15 @@
             "execute": {
                 "inArguments": [
                     {
-                        "phoneNumber": {
-                            "dataType": "Phone",
+                        "idUser": {
+                            "dataType": "Text",
                             "isNullable": false,
                             "direction": "in"   
                         }
                     },
                     {
-                        "emailAddress": {
-                            "dataType": "Email",
+                        "idCampana": {
+                            "dataType": "Phone",
                             "isNullable": false,
                             "direction": "in"
                         }
@@ -77,8 +85,8 @@
                 ],
                 "outArguments": [
                     {
-                        "foundSignupDate": {
-                            "dataType": "Date",
+                        "success": {
+                            "dataType": "Boolean",
                             "direction": "out",
                             "access": "visible"
                         }
